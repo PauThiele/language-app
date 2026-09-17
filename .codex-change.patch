@@ -1,0 +1,45 @@
+*** Begin Patch
+*** Update File: android/app/src/main/java/com/gradedreader/korean/MainActivity.kt
+@@
+-    if (reading.rationale.isNotBlank()) item { Text(reading.rationale, style = MaterialTheme.typography.bodyMedium) }
+     item { Text("Tap a word for its dictionary entry.", style = MaterialTheme.typography.bodySmall) }
+-    if (reading.targetLemmas.isNotEmpty() || reading.targetGrammar.isNotEmpty()) {
++    if (reading.rationale.isNotBlank() || reading.targetLemmas.isNotEmpty() || reading.targetGrammar.isNotEmpty()) {
+@@
+     if (expanded) {
+         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
++            if (reading.rationale.isNotBlank()) {
++                Text(reading.rationale)
++            }
+             if (reading.targetLemmas.isNotEmpty()) {
+*** Update File: backend/app/services.py
+@@
+ import re
+ import unicodedata
+ from abc import ABC, abstractmethod
+ from dataclasses import dataclass
+ from html import unescape
+ from itertools import zip_longest
++from random import SystemRandom
+ from uuid import uuid4
+@@
+ ROMANIZATION_FINALS = ("", "k", "k", "ks", "n", "nj", "nh", "t", "l", "lk", "lm", "lb", "ls", "lt", "lp", "lh", "m", "p", "ps", "t", "t", "ng", "t", "t", "k", "t", "p", "t")
++option_randomizer = SystemRandom()
+@@
+ def validate_reading(reading: GeneratedReading) -> GeneratedReading:
+@@
+         if correct in answers:
+             raise GenerationValidationError("Question leakage risk")
+         answers.add(correct)
+     return reading
++
++
++def shuffle_question_options(reading: GeneratedReading) -> GeneratedReading:
++    for question in reading.questions:
++        option_randomizer.shuffle(question.options)
++    return reading
+*** Update File: backend/app/main.py
+@@
+-        generated = validate_reading(generation_provider.generate(request, known_terms))
++        generated = shuffle_question_options(validate_reading(generation_provider.generate(request, known_terms)))
+*** End Patch

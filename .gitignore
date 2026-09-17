@@ -1,0 +1,21 @@
+# Python
+.pytest_cache/
+backend/.venv/
+backend/.pytest_cache/
+backend/__pycache__/
+backend/**/*.pyc
+backend/*.db
+backend/*.egg-info/
+backend/.env
+backend/*.log
+
+# Android/Gradle
+android/.gradle/
+android/.gradle-user-home/
+android/local.properties
+android/**/build/
+
+# IDEs and operating systems
+.idea/
+*.iml
+Thumbs.db
