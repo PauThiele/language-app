@@ -15,17 +15,9 @@ The project is designed as a full-stack mobile application: it demonstrates Andr
 
 ## Screenshots
 
-### Vocabulary
-
-<img src="Vocab.png" alt="Vocabulary screen" width="320">
-
-### Reader
-
-<img src="Generation.png" alt="Reader screen" width="320">
-
-### Comprehension check
-
-<img src="Comprehension.png" alt="Comprehension check screen" width="320">
+| Vocabulary | Reader | Comprehension check |
+| --- | --- | --- |
+| <img src="Vocab.png" alt="Vocabulary screen" width="240"> | <img src="Generation.png" alt="Reader screen" width="240"> | <img src="Comprehension.png" alt="Comprehension check screen" width="240"> |
 
 ## Architecture
 
